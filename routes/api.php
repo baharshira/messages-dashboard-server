@@ -21,4 +21,9 @@ Route::post('/signup', [UserController::class, 'signup']);
 Route::post('/login', [UserController::class, 'login']);
 
 // Protect the route - only users with a token can post a message
-Route::middleware('auth:sanctum')->post('/messages', [MessageController::class, 'index']);
+
+Route::middleware('auth:sanctum')->get('/messages', [MessageController::class, 'index']);
+
+Route::middleware('auth:sanctum')->post('/messages', [MessageController::class, 'store']);
+
+

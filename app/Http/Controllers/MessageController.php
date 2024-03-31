@@ -9,7 +9,21 @@ use Illuminate\Support\Facades\Auth;
 class MessageController
 {
     // This controller implements the create message process
-    public function index(Request $request)
+
+
+        // Method to return messages for the authenticated user
+        public function index()
+        {
+            // Retrieve messages for the authenticated user
+            $user = auth()->user();
+            $messages = $user->messages()->get();
+    
+            // Return messages as a JSON response
+            return response()->json($messages);
+        }
+
+
+    public function store(Request $request)
     {
         $validatedData = $request->validate([
             'message_title' => 'required|string|max:255',
